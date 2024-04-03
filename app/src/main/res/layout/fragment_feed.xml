@@ -4,14 +4,7 @@
 <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FeedFragment">
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="To Country Fragment"
-        android:textAlignment="center"
-        android:layout_gravity="center"/>
+    tools:context=".view.FeedFragment">
 
 </FrameLayout>
 </layout>
