@@ -44,7 +44,6 @@ android {
 
 dependencies {
 
-    val lifecycleVersion = "2.6.1"
     val supportVersion = "28.0.0"
     val retrofitVersion = "2.9.0"
     val glideVersion = "4.15.0"
@@ -60,8 +59,10 @@ dependencies {
     androidTestImplementation ("androidx.test.ext:junit:1.1.5")
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
 
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion")
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+    implementation (libs.androidx.lifecycle.viewmodel.compose)
+    implementation (libs.androidx.lifecycle.livedata.ktx)
+    implementation (libs.androidx.lifecycle.lifecycle.livedata.ktx2)
+
     //room
     implementation ("androidx.room:room-runtime:$roomVersion")
     implementation ("androidx.legacy:legacy-support-v4:1.0.0")

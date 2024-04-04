@@ -1,13 +1,23 @@
 package com.ardahangokhan.countries.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ardahangokhan.countries.R
+import com.ardahangokhan.countries.adapter.CountryAdapter
+import com.ardahangokhan.countries.databinding.FragmentFeedBinding
+import com.ardahangokhan.countries.viewmodel.FeedViewModel
 
 class FeedFragment : Fragment() {
+    private lateinit var binding: FragmentFeedBinding
+    private lateinit var viewModel: FeedViewModel
+    private val countryAdapter=CountryAdapter(arrayListOf())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -15,12 +25,37 @@ class FeedFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_feed, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel= ViewModelProvider(this).get(FeedViewModel::class.java)
+        viewModel.refreshData()
+
+        binding.countryList.layoutManager = LinearLayoutManager(context)
+        binding.countryList.adapter = countryAdapter
+    }
+    fun observeLiveData(){
+        viewModel.countries.observe(this, Observer {countries->
+            countries?.let {
+                binding.countryList.visibility=View.VISIBLE
+                countryAdapter.updateCountryList(countries)
+
+
+
+
+            }
+        })
+        viewModel.countryError.observe(viewLifecycleOwner, Observer {error->
+            error?.let {
+
+            }
+
+        })
     }
 }
