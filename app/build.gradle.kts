@@ -45,10 +45,10 @@ android {
 dependencies {
 
     val supportVersion = "28.0.0"
-    val retrofitVersion = "2.9.0"
-    val glideVersion = "4.15.0"
-    val roomVersion = "2.6.0"
-    val navVersion = "2.7.4"
+    val retrofitVersion = "2.11.0"
+    val glideVersion = "4.16.0"
+    val roomVersion = "2.6.1"
+    val navVersion = "2.7.7"
     val preferencesVersion = "1.2.1"
 
     implementation ("androidx.core:core-ktx:1.12.0")
@@ -71,7 +71,7 @@ dependencies {
     annotationProcessor ("androidx.room:room-compiler:$roomVersion")
 
     //coroutines for threads
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
 
     // navigation
     implementation ("androidx.navigation:navigation-fragment-ktx:$navVersion")
