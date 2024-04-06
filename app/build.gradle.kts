@@ -48,6 +48,7 @@ dependencies {
     val retrofitVersion = "2.11.0"
     val glideVersion = "4.16.0"
     val roomVersion = "2.6.1"
+    val rxJavaVersion = "2.1.1"
     val navVersion = "2.7.7"
     val preferencesVersion = "1.2.1"
 
@@ -80,11 +81,12 @@ dependencies {
     //retrofit
     implementation ("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation ("com.squareup.retrofit2:converter-gson:$retrofitVersion")
-    implementation ("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
+    implementation ("com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion")
 
     //rxJava
     implementation("androidx.room:room-rxjava2:$roomVersion")
-
+    implementation ("io.reactivex.rxjava2:rxjava:$rxJavaVersion")
+    implementation ("io.reactivex.rxjava2:rxandroid:$rxJavaVersion")
 
     //glide
     implementation ("com.github.bumptech.glide:glide:$glideVersion")
