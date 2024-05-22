@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ardahangokhan.countries.R
 import com.ardahangokhan.countries.databinding.FragmentCountryBinding
+import com.ardahangokhan.countries.util.downloadFromUrl
+import com.ardahangokhan.countries.util.placeholderProgressBar
 import com.ardahangokhan.countries.viewmodel.CountryViewModel
 
 class CountryFragment : Fragment() {
@@ -30,27 +32,34 @@ class CountryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel=ViewModelProvider(this).get(CountryViewModel::class.java)
-        viewModel.getDataFromRoom()
 
         arguments?.let {
             countryUuid = CountryFragmentArgs.fromBundle(it).countryUuid
             println("benim uuid budur $countryUuid")
 
         }
+        viewModel=ViewModelProvider(this).get(CountryViewModel::class.java)
+        viewModel.getDataFromRoom(countryUuid)
+
+
         observeLiveData()
     }
 
     private fun observeLiveData(){
         viewModel.countryLiveData.observe(viewLifecycleOwner) {country->
             country?.let {
-                binding.countryName.text=country.countryName
-                binding.countryCapital.text=country.countryCapital
-                binding.countryCurrency.text=country.countryCurrency
-                binding.countryLanguage.text=country.countryLanguage
-                binding.countryRegion.text=country.countryRegion
+                binding.countryName.text = country.countryName
+                binding.countryCapital.text = country.countryCapital
+                binding.countryCurrency.text = country.countryCurrency
+                binding.countryLanguage.text = country.countryLanguage
+                binding.countryRegion.text = country.countryRegion
+                context?.let {
+                    binding.countryImage.downloadFromUrl(
+                        country.imageUrl,
+                        placeholderProgressBar(it)
+                    )
 
-
+                }
             }
         }
     }
