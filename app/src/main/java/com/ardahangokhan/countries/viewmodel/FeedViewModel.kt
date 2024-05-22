@@ -1,6 +1,7 @@
 package com.ardahangokhan.countries.viewmodel
 
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.ardahangokhan.countries.model.Country
 import com.ardahangokhan.countries.service.CountryAPIService
@@ -16,16 +17,31 @@ class FeedViewModel(application: Application) :BaseViewModel(application){
     private val countryApiService = CountryAPIService()
     private val disposable = CompositeDisposable()
     private var customPreferences = CustomSharedPreferences(getApplication())
+    private var refreshTime = 10*60*1000*1000*1000L
 
     val countries = MutableLiveData<List<Country>>()
     val countryError = MutableLiveData<Boolean>()
     val countryLoading = MutableLiveData<Boolean>()
 
     fun refreshData(){
-
+        val updateTime = customPreferences.getTime()
+        if (updateTime!=null&&updateTime!=0L&&System.nanoTime()-updateTime<refreshTime){
+            getDataFromSQLite()
+        }
+        else{
+            getDataFromAPI()
+        }
+    }
+    fun refreshFromAPI(){
         getDataFromAPI()
-
-
+    }
+    private fun getDataFromSQLite(){
+        countryLoading.value=true
+        launch {
+            val countries = CountryDatabase(getApplication()).countryDao().getAllCountries()
+            showCountries(countries)
+            Toast.makeText(getApplication(),"Countries From SQLite",Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun getDataFromAPI(){
@@ -37,6 +53,8 @@ class FeedViewModel(application: Application) :BaseViewModel(application){
                 .subscribeWith(object : DisposableSingleObserver<List<Country>>(){
                     override fun onSuccess(t: List<Country>) {
                     storeInSQLite(t)
+                        Toast.makeText(getApplication(),"Countries From API",Toast.LENGTH_SHORT).show()
+
                     }
 
                     override fun onError(e: Throwable) {
