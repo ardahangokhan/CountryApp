@@ -48,13 +48,13 @@ dependencies {
     val retrofitVersion = "2.11.0"
     val glideVersion = "4.16.0"
     val roomVersion = "2.6.1"
-    val rxJavaVersion = "2.1.1"
+    val rxJavaVersion = "2.2.21"
     val navVersion = "2.7.7"
     val preferencesVersion = "1.2.1"
 
-    implementation ("androidx.core:core-ktx:1.12.0")
+    implementation ("androidx.core:core-ktx:1.13.1")
     implementation ("androidx.appcompat:appcompat:1.6.1")
-    implementation ("com.google.android.material:material:1.11.0")
+    implementation ("com.google.android.material:material:1.12.0")
     implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
     testImplementation ("junit:junit:4.13.2")
     androidTestImplementation ("androidx.test.ext:junit:1.1.5")
@@ -72,7 +72,7 @@ dependencies {
     annotationProcessor ("androidx.room:room-compiler:$roomVersion")
 
     //coroutines for threads
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
 
     // navigation
     implementation ("androidx.navigation:navigation-fragment-ktx:$navVersion")
@@ -86,7 +86,7 @@ dependencies {
     //rxJava
     implementation("androidx.room:room-rxjava2:$roomVersion")
     implementation ("io.reactivex.rxjava2:rxjava:$rxJavaVersion")
-    implementation ("io.reactivex.rxjava2:rxandroid:$rxJavaVersion")
+    implementation ("io.reactivex.rxjava2:rxandroid:2.1.1")
 
     //glide
     implementation ("com.github.bumptech.glide:glide:$glideVersion")
