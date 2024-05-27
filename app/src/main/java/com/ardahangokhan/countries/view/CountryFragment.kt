@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ardahangokhan.countries.R
 import com.ardahangokhan.countries.databinding.FragmentCountryBinding
-import com.ardahangokhan.countries.util.downloadFromUrl
-import com.ardahangokhan.countries.util.placeholderProgressBar
 import com.ardahangokhan.countries.viewmodel.CountryViewModel
 
 class CountryFragment : Fragment() {
@@ -48,6 +46,8 @@ class CountryFragment : Fragment() {
     private fun observeLiveData(){
         viewModel.countryLiveData.observe(viewLifecycleOwner) {country->
             country?.let {
+                binding.selectedCountry = country
+                /*
                 binding.countryName.text = country.countryName
                 binding.countryCapital.text = country.countryCapital
                 binding.countryCurrency.text = country.countryCurrency
@@ -60,6 +60,8 @@ class CountryFragment : Fragment() {
                     )
 
                 }
+
+                 */
             }
         }
     }
